@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 db = SQLAlchemy(app)
@@ -26,6 +27,20 @@ db.session.commit()
 @app.route('/CodeSpeedy')
 def Welcome():
     return render_template('index.html')
+
+@app.route('/posts/new', methods=['GET', 'POST'])
+def new_post():
+    if request.method == 'POST':
+        post_title = request.form['title']
+        post_content = request.form['post']
+        post_author = request.form['author']
+        new_post = CodeSpeedyBlog(title=post_title,
+                        content=post_content, posted_by=post_author)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect('/posts')
+    else:
+        return render_template('new_post.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
