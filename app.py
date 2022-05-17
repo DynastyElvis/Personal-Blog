@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -44,6 +43,26 @@ def posts():
     else:
         all_posts = CodeSpeedyBlog.query.order_by(CodeSpeedyBlog.posted_on).all()
         return render_template('posts.html', posts=all_posts)
+
+@app.route('/posts/delete/<int:id>')
+def delete(id):
+    to_delete = CodeSpeedyBlog.query.get_or_404(id)
+    db.session.delete(to_delete)
+    db.session.commit()
+    return redirect('/posts')     
+
+@app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    to_edit = CodeSpeedyBlog.query.get_or_404(id)
+    if request.method == 'POST':
+        to_edit.title = request.form['title']
+        to_edit.author = request.form['author']
+        to_edit.content = request.form['post']
+        db.session.commit()
+        return redirect('/posts')
+
+    else:
+        return render_template('edit.html', post=to_edit)
 
 @app.route('/posts/new', methods=['GET', 'POST'])
 def new_post():
