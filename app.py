@@ -1,4 +1,5 @@
-from flask import Flask, render_template, redirect
+
+from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -27,6 +28,22 @@ db.session.commit()
 @app.route('/CodeSpeedy')
 def Welcome():
     return render_template('index.html')
+
+@app.route('/posts',  methods=['GET', 'POST'])
+def posts():
+    if request.method == 'POST':
+        post_title = request.form['title']
+        post_content = request.form['post']
+        post_author = request.form['author']
+        new_post = CodeSpeedyBlog(title=post_title,
+                        content=post_content, posted_by=post_author)
+        db.session.add(new_post)
+        db.session.commit()
+
+        return redirect('/posts')
+    else:
+        all_posts = CodeSpeedyBlog.query.order_by(CodeSpeedyBlog.posted_on).all()
+        return render_template('posts.html', posts=all_posts)
 
 @app.route('/posts/new', methods=['GET', 'POST'])
 def new_post():
