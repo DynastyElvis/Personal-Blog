@@ -21,6 +21,7 @@ class CodeSpeedyBlog(db.Model):
         return self.title
 
 
+
 db.create_all()
 db.session.commit()
 
