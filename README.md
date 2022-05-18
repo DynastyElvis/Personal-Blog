@@ -16,6 +16,7 @@ This is a personal blogging website where you can create and share your opinions
 
 [Go Back to the top](#Personal-Blog)
 
+
 ## My Blogs
 The user would like to.... :
 *  View the blog posts on the site
