@@ -11,6 +11,7 @@ You can view the site at: [ My Blogpost Live Link](https://pitches-posts.herokua
 " height="400px">
 <img src="https://github.com/DynastyElvis/Personal-Blog/blob/main/images/Screenshot%20from%202022-05-17%2019-24-29.png" height="400px">
 
+
 ## Description
 This is a personal blogging website where you can create and share your opinions and other users can read and comment on them. Additionally it has a feature that displays random quotes to inspire your users.
 
