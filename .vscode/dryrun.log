@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/moringa/Desktop/Moringa Software  DEV/Software Dev - CORE/Python - Flask/Personal-Blog'
+make: Leaving directory '/home/moringa/Desktop/Moringa Software  DEV/Software Dev - CORE/Python - Flask/Personal-Blog'
+ 
+Makefile:2: *** missing separator.  Stop.
+
